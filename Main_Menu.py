@@ -3,7 +3,7 @@ import resources
 
 class MainMenu():
     def __init__(self, screen):
-        self.start = resources.AllSprites["Menu.png"]
+        self.start = resources.AllSprites["ActiveMenu.png"]
         self.cont = resources.AllSprites["Menu.png"]
         self.exit = resources.AllSprites["Menu.png"]
         self.buttons = [self.start, self.cont, self.exit]
@@ -31,17 +31,17 @@ class MainMenu():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                     resources.running = False
-                    
-            #if event.type == pygame.KEYDOWN:
-            #if event.key == pygame.K_w:
+
             if keys[pygame.K_w]:
                 self.previous = self.place
                 if self.place != 0:
                     self.place -= 1
                 else:
                     self.place = len(self.buttons)-1
+
+                self.buttons[self.place] = resources.AllSprites["ActiveMenu.png"]
+                self.buttons[self.previous] = resources.AllSprites["Menu.png"]
                 
-            #elif event.key == pygame.K_s:
             if keys[pygame.K_s]:
                 self.previous = self.place
                 if self.place != (len(self.buttons) - 1):
@@ -49,5 +49,7 @@ class MainMenu():
                 else:
                     self.place = 0
 
-        self.buttons[self.place] = resources.AllSprites["ActiveMenu.png"]
-        self.buttons[self.previous] = resources.AllSprites["Menu.png"]
+                self.buttons[self.place] = resources.AllSprites["ActiveMenu.png"]
+                self.buttons[self.previous] = resources.AllSprites["Menu.png"]
+
+            
