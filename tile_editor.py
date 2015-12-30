@@ -27,6 +27,7 @@ class Tile_Editor():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 resources.running = False
+
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_ESCAPE:
                     resources.running = False

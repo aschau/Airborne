@@ -11,7 +11,7 @@ if not pygame.font:
 if not pygame.mixer:
     print('Warning, sound disabled')
 
-class RPGMain:
+class Airborne:
     def __init__(self):
         pygame.init()
         self.width = resources.width
@@ -43,5 +43,5 @@ class RPGMain:
         pygame.quit()        
     
 if __name__ == "__main__":
-    MainWindow = RPGMain()
+    MainWindow = Airborne()
     MainWindow.game_loop()
