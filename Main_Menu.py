@@ -1,7 +1,7 @@
 import pygame
 import resources
 
-class MainMenu():
+class Main_Menu():
     def __init__(self, screen):
         self.title = "Airborne"
 
@@ -69,7 +69,14 @@ class MainMenu():
                 self.buttons[self.previous] = resources.AllSprites["Menu.png"]
 
             if keys[pygame.K_RETURN]:
-                if self.place == 2:
+                if self.place == 0:
+                    pass
+                
+                elif self.place == 1:
+                    pass
+                
+                elif self.place == 2:
                     resources.running = False
-
-            
+                    
+                elif self.place == 3:
+                    return "editor"            
