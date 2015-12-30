@@ -7,15 +7,17 @@ class Main_Menu():
 
         self.sbutton = "Start"
         self.cbutton = "Continue"
+        self.sebutton = "Settings"
         self.ebutton = "Exit"
         self.edbutton = "Editor"
-        self.textbuttons = [self.sbutton, self.cbutton, self.ebutton, self.edbutton]
+        self.textbuttons = [self.sbutton, self.cbutton, self.sebutton, self.ebutton, self.edbutton]
 
         self.start = resources.AllSprites["ActiveMenu.png"]
         self.cont = resources.AllSprites["Menu.png"]
+        self.settings = resources.AllSprites["Menu.png"]
         self.exit = resources.AllSprites["Menu.png"]
         self.editor = resources.AllSprites["Menu.png"]
-        self.buttons = [self.start, self.cont, self.exit, self.editor]
+        self.buttons = [self.start, self.cont, self.settings, self.exit, self.editor]
 
         self.previous = 0
         self.place = 0
@@ -31,14 +33,14 @@ class Main_Menu():
         self.bfont = pygame.font.Font(pygame.font.match_font('comicsansms'), self.bfontsize)
 
         self.screen = screen
-        self.background = resources.AllSprites["rpgworld.png"]
+        self.background = resources.AllSprites["Filler.png"]
         
     def draw(self):
         self.screen.blit(self.background, (35, 35))
 
         for button in range(len(self.buttons)):
             self.screen.blit(self.buttons[button], (resources.width/2 - self.menubarw/2, resources.height/2 + (self.menubarh * button)))
-            self.screen.blit(self.bfont.render(self.textbuttons[button], True, pygame.Color(255,255,255)), (resources.width/2 - self.menubarw/2, resources.height/2 + (self.menubarh * button)))
+            self.screen.blit(self.bfont.render(self.textbuttons[button], True, pygame.Color(255,255,255)), (resources.width/2 - self.menubarw/2 + 5, resources.height/2 + (self.menubarh * button)))
 
         self.screen.blit(self.tfont.render(self.title, True, pygame.Color(255,255,255)), (resources.width/2 - (self.tfontsize*len(self.title)/4.2), resources.height/5))
 
@@ -74,9 +76,12 @@ class Main_Menu():
                 
                 elif self.place == 1:
                     pass
-                
+
                 elif self.place == 2:
+                    pass
+                
+                elif self.place == 3:
                     resources.running = False
                     
-                elif self.place == 3:
+                elif self.place == 4:
                     return "editor"            
