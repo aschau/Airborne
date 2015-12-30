@@ -15,7 +15,7 @@ class RPGMain:
         pygame.init()
         self.width = resources.width
         self.height = resources.height
-        self.fullscreen = False
+##        self.fullscreen = False
         self.screen = pygame.display.set_mode((self.width, self.height))
         #self.running = True
         self.menu = MainMenu(self.screen)
@@ -26,18 +26,18 @@ class RPGMain:
                 if event.type == pygame.QUIT:
                     resources.running = False
                     
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_BACKQUOTE:
-                        try:
-                            if not self.fullscreen:
-                                self.screen = pygame.display.set_mode((self.width, self.height), pygame.FULLSCREEN)
-                                self.fullscreen = True
-
-                            else:
-                                self.screen = pygame.display.set_mode((self.width, self.height))
-                                self.fullscreen = False
-                        except:
-                            pass
+##                elif event.type == pygame.KEYDOWN:
+##                    if event.key == pygame.K_BACKQUOTE:
+##                        try:
+##                            if not self.fullscreen:
+##                                self.screen = pygame.display.set_mode((self.width, self.height), pygame.FULLSCREEN)
+##                                self.fullscreen = True
+##
+##                            else:
+##                                self.screen = pygame.display.set_mode((self.width, self.height))
+##                                self.fullscreen = False
+##                        except:
+##                            pass
             self.menu.draw()
             self.menu.update()
             pygame.display.update()

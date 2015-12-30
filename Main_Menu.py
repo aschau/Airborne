@@ -3,28 +3,44 @@ import resources
 
 class MainMenu():
     def __init__(self, screen):
+        self.title = "Airborne"
+
+        self.sbutton = "Start"
+        self.cbutton = "Continue"
+        self.ebutton = "Exit"
+        self.edbutton = "Editor"
+        self.textbuttons = [self.sbutton, self.cbutton, self.ebutton, self.edbutton]
+
         self.start = resources.AllSprites["ActiveMenu.png"]
         self.cont = resources.AllSprites["Menu.png"]
         self.exit = resources.AllSprites["Menu.png"]
-        self.buttons = [self.start, self.cont, self.exit]
+        self.editor = resources.AllSprites["Menu.png"]
+        self.buttons = [self.start, self.cont, self.exit, self.editor]
+
         self.previous = 0
         self.place = 0
         self.active = self.buttons[self.place]
+
         self.menubarw = 200
         self.menubarh = 60
-        self.fontsize = 56
-        self.font = pygame.font.Font(pygame.font.match_font('comicsansms'), self.fontsize)
+
+        self.tfontsize = 56
+        self.tfont = pygame.font.Font(pygame.font.match_font('comicsansms'), self.tfontsize)
+
+        self.bfontsize = 28
+        self.bfont = pygame.font.Font(pygame.font.match_font('comicsansms'), self.bfontsize)
+
         self.screen = screen
         self.background = resources.AllSprites["rpgworld.png"]
         
     def draw(self):
         self.screen.blit(self.background, (35, 35))
-        self.screen.blit(self.buttons[0], (resources.width/2 - self.menubarw/2.8, resources.height/3 + self.menubarh))
-        self.screen.blit(self.buttons[1], (resources.width/2 - self.menubarw/2.8, resources.height/2 + self.menubarh))
-        self.screen.blit(self.buttons[2], (resources.width/2 - self.menubarw/2.8, resources.height/1.5 + self.menubarh))
-        s_title = "RPG World"
-        title = self.font.render(s_title, True, pygame.Color(255,255,255))
-        self.screen.blit(title, (resources.width/2 - (self.fontsize*len(s_title)/4.2), resources.height/5))
+
+        for button in range(len(self.buttons)):
+            self.screen.blit(self.buttons[button], (resources.width/2 - self.menubarw/2, resources.height/2 + (self.menubarh * button)))
+            self.screen.blit(self.bfont.render(self.textbuttons[button], True, pygame.Color(255,255,255)), (resources.width/2 - self.menubarw/2, resources.height/2 + (self.menubarh * button)))
+
+        self.screen.blit(self.tfont.render(self.title, True, pygame.Color(255,255,255)), (resources.width/2 - (self.tfontsize*len(self.title)/4.2), resources.height/5))
 
     def update(self):
         keys = pygame.key.get_pressed()
@@ -51,5 +67,9 @@ class MainMenu():
 
                 self.buttons[self.place] = resources.AllSprites["ActiveMenu.png"]
                 self.buttons[self.previous] = resources.AllSprites["Menu.png"]
+
+            if keys[pygame.K_RETURN]:
+                if self.place == 2:
+                    resources.running = False
 
             
