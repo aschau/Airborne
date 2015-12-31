@@ -23,6 +23,12 @@ class Airborne:
         self.editor = Tile_Editor(self.screen)
         self.menu = Main_Menu(self.screen)
 
+        self.fontsize = 10
+        self.font = pygame.font.Font(pygame.font.match_font('comicsansms'), self.fontsize)
+
+        for image in resources.AllSprites.values():
+            image.convert_alpha()
+
     def game_loop(self):
         while resources.running:
             for event in pygame.event.get():
@@ -46,19 +52,21 @@ class Airborne:
 
             elif self.mode == "edit":
                 if self.previous != "editor":
-                    self.screen = pygame.display.set_mode((1366, 768), pygame.FULLSCREEN|pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.RESIZABLE)
+                    self.screen = pygame.display.set_mode((1344, 768), pygame.FULLSCREEN|pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.RESIZABLE)
                     self.previous = "editor"
                     
                 self.editor.draw()
-                selection = self.editor.update()
+                self.editor.mouse_update()
+                selection = self.editor.key_update()
 
                 if selection == "menu":
                     self.mode = "menu"
                     self.previous = "editor"
-                
+
+            self.screen.blit(self.font.render(str(int(self.clock.get_fps())), True, pygame.Color(255,255,255)), (0, 0))
+
             pygame.display.update()
-            self.clock.tick(30)
-##            print(self.clock.get_fps())
+            self.clock.tick_busy_loop(60)
                 
         pygame.quit()        
     

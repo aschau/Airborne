@@ -15,9 +15,10 @@ class Tile_Editor():
         
         self.area = tile_helper.Scene(int(resources.width/32), int(resources.height/32))
         self.sidebar = tile_helper.Sidebar(self.width, self.height, self.screen)
+
+        self.next = pygame.time.get_ticks() + 60
     
     def draw(self):
-        self.draw_grid()
         self.sidebar.draw()
         
         for row in range(len(self.area.grid)):
@@ -25,32 +26,54 @@ class Tile_Editor():
                 if self.area.grid[row][column] == 'T':
                     self.screen.blit(resources.AllSprites["basic_block.png"], (column * self.box_size, row * self.box_size, self.box_size, self.box_size))
 
-    def update(self):
-        keys = pygame.key.get_pressed()
-        
-        if keys[pygame.K_RETURN]:
-            if self.sidebar.place == 2:
-                pass
-            
-            elif self.sidebar.place == 1:
-                pass
+                if self.area.grid[row][column] == "X":
+                    pygame.draw.rect(self.screen, pygame.Color(0, 0, 0, 0), (column * self.box_size, row * self.box_size, self.box_size, self.box_size))
 
-            elif self.sidebar.place == 0:
-                return "menu"
+        self.draw_grid()
 
-        if keys[pygame.K_UP]:
-            self.sidebar.switch_button(pygame.K_UP)
-            
-        if keys[pygame.K_DOWN]:
-            self.sidebar.switch_button(pygame.K_DOWN)
-
+    def mouse_update(self):
         if pygame.mouse.get_pos()[0] < resources.width and pygame.mouse.get_pos()[0] > 0 and pygame.mouse.get_pos()[1] < resources.height and pygame.mouse.get_pos()[1] > 0:
             if pygame.mouse.get_pressed()[0]:
                 self.mouse_col = pygame.mouse.get_pos()[0] // self.box_size
                 self.mouse_row = pygame.mouse.get_pos()[1] // self.box_size
                 self.area.edit_tile(self.mouse_col, self.mouse_row, 'T')
+                
+    def key_update(self):
+        if pygame.time.get_ticks() > self.next:
+            self.next = pygame.time.get_ticks() + 60
+            keys = pygame.key.get_pressed()
+            
+            if keys[pygame.K_RETURN]:
+                if self.sidebar.column == 0:
+                    if self.sidebar.place == 2:
+                        pass
+                    
+                    elif self.sidebar.place == 1:
+                        pass
 
-        pygame.time.delay(60)
+                    elif self.sidebar.place == 0:
+                        return "menu"
+                if self.sidebar.column == 1:
+                    if self.sidebar.place == 2:
+                        self.area.clear()
+                    
+                    elif self.sidebar.place == 1:
+                        pass
+
+                    elif self.sidebar.place == 0:
+                        return "menu"
+
+            if keys[pygame.K_UP]:
+                self.sidebar.switch_button(pygame.K_UP)
+                
+            if keys[pygame.K_DOWN]:
+                self.sidebar.switch_button(pygame.K_DOWN)
+
+            if keys[pygame.K_RIGHT]:
+                self.sidebar.switch_button(pygame.K_RIGHT)
+                
+            if keys[pygame.K_LEFT]:
+                self.sidebar.switch_button(pygame.K_LEFT)
                     
     def draw_grid(self):
         for line in range(1, int(resources.width/32)):

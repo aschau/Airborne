@@ -34,6 +34,8 @@ class Main_Menu():
 
         self.screen = screen
         self.background = resources.AllSprites["Filler.png"]
+
+        self.next = pygame.time.get_ticks() + 60
         
     def draw(self):
         self.screen.blit(self.background, (0, 0))
@@ -45,42 +47,44 @@ class Main_Menu():
         self.screen.blit(self.tfont.render(self.title, True, pygame.Color(255,255,255)), (resources.width/2 - (self.tfontsize*len(self.title)/4.2), resources.height/5))
 
     def update(self):
-        keys = pygame.key.get_pressed()
+        if pygame.time.get_ticks() > self.next:
+            self.next = pygame.time.get_ticks() + 60
+            keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_w]:
-            self.previous = self.place
-            if self.place != 0:
-                self.place -= 1
-            else:
-                self.place = len(self.buttons)-1
+            if keys[pygame.K_w]:
+                self.previous = self.place
+                if self.place != 0:
+                    self.place -= 1
+                else:
+                    self.place = len(self.buttons)-1
 
-            self.buttons[self.place] = resources.AllSprites["ActiveMenu.png"]
-            self.buttons[self.previous] = resources.AllSprites["Menu.png"]
-            
-        if keys[pygame.K_s]:
-            self.previous = self.place
-            if self.place != (len(self.buttons) - 1):
-                self.place += 1
-            else:
-                self.place = 0
-
-            self.buttons[self.place] = resources.AllSprites["ActiveMenu.png"]
-            self.buttons[self.previous] = resources.AllSprites["Menu.png"]
-
-        if keys[pygame.K_RETURN]:
-            if self.place == 0:
-                pass
-            
-            elif self.place == 1:
-                pass
-
-            elif self.place == 2:
-                pass
-            
-            elif self.place == 3:
-                return "exit"
+                self.buttons[self.place] = resources.AllSprites["ActiveMenu.png"]
+                self.buttons[self.previous] = resources.AllSprites["Menu.png"]
                 
-            elif self.place == 4:
-                return "editor"
+            if keys[pygame.K_s]:
+                self.previous = self.place
+                if self.place != (len(self.buttons) - 1):
+                    self.place += 1
+                else:
+                    self.place = 0
 
-        pygame.time.delay(60)
+                self.buttons[self.place] = resources.AllSprites["ActiveMenu.png"]
+                self.buttons[self.previous] = resources.AllSprites["Menu.png"]
+
+            if keys[pygame.K_RETURN]:
+                if self.place == 0:
+                    pass
+                
+                elif self.place == 1:
+                    pass
+
+                elif self.place == 2:
+                    pass
+                
+                elif self.place == 3:
+                    return "exit"
+                    
+                elif self.place == 4:
+                    return "editor"
+
+##        pygame.time.delay(90)
