@@ -16,5 +16,7 @@ W and S for up, down
 Return for input
 
 Tile Editor:
-UP and DOWN arrow keys for side bar menu
+UP, DOWN, LEFT, RIGHT arrow keys for side bar menu
 Return for input
+
+Type file name into console when saving. It'll add .txt automatically.
