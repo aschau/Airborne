@@ -21,7 +21,8 @@ class Tile_Editor():
         for row in range(len(self.area.grid)):
             for column in range(len(self.area.grid[row])):
                 if self.area.grid[row][column] == 'T':
-                    pygame.draw.rect(self.screen, pygame.Color(255, 255, 255, 255), (column * self.box_size, row * self.box_size, self.box_size, self.box_size))
+                    #pygame.draw.rect(self.screen, pygame.Color(255, 255, 255, 255), (column * self.box_size, row * self.box_size, self.box_size, self.box_size))
+                    self.screen.blit(resources.AllSprites["basic_block.png"], (column * self.box_size, row * self.box_size, self.box_size, self.box_size))
 
     def update(self):
         for event in pygame.event.get():
@@ -30,7 +31,7 @@ class Tile_Editor():
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_ESCAPE:
-                    resources.running = False
+                    return "menu"
 
             if pygame.mouse.get_pressed()[0]:
                 self.mouse_col = pygame.mouse.get_pos()[0] // self.box_size

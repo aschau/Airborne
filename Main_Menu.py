@@ -32,11 +32,11 @@ class Main_Menu():
         self.bfontsize = 28
         self.bfont = pygame.font.Font(pygame.font.match_font('comicsansms'), self.bfontsize)
 
-        self.screen = screen
+        self.screen = pygame.display.set_mode((resources.width, resources.height), pygame.FULLSCREEN|pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.RESIZABLE)
         self.background = resources.AllSprites["Filler.png"]
         
     def draw(self):
-        self.screen.blit(self.background, (35, 35))
+        self.screen.blit(self.background, (0, 0))
 
         for button in range(len(self.buttons)):
             self.screen.blit(self.buttons[button], (resources.width/2 - self.menubarw/2, resources.height/2 + (self.menubarh * button)))
@@ -49,6 +49,7 @@ class Main_Menu():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                     resources.running = False
+            
 
             if keys[pygame.K_w]:
                 self.previous = self.place
