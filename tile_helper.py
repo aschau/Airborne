@@ -21,14 +21,15 @@ class Scene():
 
     def save(self):
         fname = input("File name: ")
-        file = open(fname, 'w')
+        file = open(fname + ".txt", 'w')
 
         for row in self.grid:
             line = ""
 
             for char in row:
                 line += char
-                file.write(line)
+
+            file.write(line + "\n")
 
         file.close()
 

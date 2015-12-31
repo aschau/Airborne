@@ -46,7 +46,9 @@ class Tile_Editor():
             if keys[pygame.K_RETURN]:
                 if self.sidebar.column == 0:
                     if self.sidebar.place == 2:
-                        pass
+                        self.screen = pygame.display.set_mode((400, 400), pygame.RESIZABLE)
+                        self.area.save()
+                        self.screen = pygame.display.set_mode((1344, 768), pygame.FULLSCREEN|pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.RESIZABLE)
                     
                     elif self.sidebar.place == 1:
                         pass
