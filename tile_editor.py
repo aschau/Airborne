@@ -1,43 +1,56 @@
 import pygame
-import scene
+import tile_helper
 import resources
 import os
 
 class Tile_Editor():
     def __init__(self, screen):
         self.screen = screen
+        self.width = 1344
+        self.height = 768
 
         self.box_size = 32
         self.mouse_col = 0
         self.mouse_row = 0
         
-        self.area = scene.Scene(int(resources.width/32), int(resources.height/32))
-        
-
+        self.area = tile_helper.Scene(int(resources.width/32), int(resources.height/32))
+        self.sidebar = tile_helper.Sidebar(self.width, self.height, self.screen)
+    
     def draw(self):
-        self.screen.fill((0, 0, 0))
         self.draw_grid()
-        self.sidebar()  
-
+        self.sidebar.draw()
+        
         for row in range(len(self.area.grid)):
             for column in range(len(self.area.grid[row])):
                 if self.area.grid[row][column] == 'T':
                     self.screen.blit(resources.AllSprites["basic_block.png"], (column * self.box_size, row * self.box_size, self.box_size, self.box_size))
 
     def update(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                resources.running = False
+        keys = pygame.key.get_pressed()
+        
+        if keys[pygame.K_RETURN]:
+            if self.sidebar.place == 2:
+                pass
+            
+            elif self.sidebar.place == 1:
+                pass
 
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_ESCAPE:
-                    return "menu"
+            elif self.sidebar.place == 0:
+                return "menu"
 
-            if pygame.mouse.get_pos()[0] < resources.width and pygame.mouse.get_pos()[0] > 0 and pygame.mouse.get_pos()[1] < resources.height and pygame.mouse.get_pos()[1] > 0:
-                if pygame.mouse.get_pressed()[0]:
-                    self.mouse_col = pygame.mouse.get_pos()[0] // self.box_size
-                    self.mouse_row = pygame.mouse.get_pos()[1] // self.box_size
-                    self.area.edit_tile(self.mouse_col, self.mouse_row, 'T')
+        if keys[pygame.K_UP]:
+            self.sidebar.switch_button(pygame.K_UP)
+            
+        if keys[pygame.K_DOWN]:
+            self.sidebar.switch_button(pygame.K_DOWN)
+
+        if pygame.mouse.get_pos()[0] < resources.width and pygame.mouse.get_pos()[0] > 0 and pygame.mouse.get_pos()[1] < resources.height and pygame.mouse.get_pos()[1] > 0:
+            if pygame.mouse.get_pressed()[0]:
+                self.mouse_col = pygame.mouse.get_pos()[0] // self.box_size
+                self.mouse_row = pygame.mouse.get_pos()[1] // self.box_size
+                self.area.edit_tile(self.mouse_col, self.mouse_row, 'T')
+
+        pygame.time.delay(60)
                     
     def draw_grid(self):
         for line in range(1, int(resources.width/32)):
@@ -45,12 +58,5 @@ class Tile_Editor():
 
         for line in range(1, int(resources.height/32)):
             pygame.draw.line(self.screen, pygame.Color(255,255,255,255),(0, line * self.box_size), (resources.width, line * self.box_size))
-
-    def sidebar(self):
-        pygame.draw.rect(self.screen, pygame.Color(166, 166, 166, 166), (resources.width, 0, 1366-resources.width, 768))
-
-
-
-
 
         
