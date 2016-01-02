@@ -16,7 +16,7 @@ class Airborne:
         pygame.init()
         self.width = resources.width
         self.height = resources.height
-        self.screen = pygame.display.set_mode((self.width, self.height), pygame.FULLSCREEN|pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.RESIZABLE)
+        self.screen = pygame.display.set_mode((self.width, self.height), pygame.FULLSCREEN|pygame.RESIZABLE)
         self.mode = "menu"
         self.previous = "menu"
         self.clock = pygame.time.Clock()
@@ -37,7 +37,7 @@ class Airborne:
                     
             if self.mode == "menu":
                 if self.previous != "menu":
-                    self.screen = pygame.display.set_mode((self.width, self.height), pygame.FULLSCREEN|pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.RESIZABLE)
+                    self.screen = pygame.display.set_mode((self.width, self.height), pygame.FULLSCREEN|pygame.RESIZABLE)
                     self.previous = "menu"
 
                 self.menu.draw()
@@ -52,7 +52,7 @@ class Airborne:
 
             elif self.mode == "edit":
                 if self.previous != "editor":
-                    self.screen = pygame.display.set_mode((1344, 768), pygame.FULLSCREEN|pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.RESIZABLE)
+                    self.screen = pygame.display.set_mode((1344, 768), pygame.FULLSCREEN|pygame.RESIZABLE)
                     self.previous = "editor"
                     
                 self.editor.draw()
