@@ -20,3 +20,6 @@ UP, DOWN, LEFT, RIGHT arrow keys for side bar menu
 Return for input
 
 Type file name into console when saving. It'll add .txt automatically.
+
+Credits:
+Title Picture: Shannon Guo
