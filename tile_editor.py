@@ -16,7 +16,7 @@ class Tile_Editor():
         self.area = tile_helper.Scene(int(resources.width/32), int(resources.height/32))
         self.sidebar = tile_helper.Sidebar(self.width, self.height, self.screen)
 
-        self.next = pygame.time.get_ticks() + 60
+        self.next = pygame.time.get_ticks() + 70
     
     def draw(self):
         self.sidebar.draw()
@@ -40,7 +40,7 @@ class Tile_Editor():
                 
     def key_update(self):
         if pygame.time.get_ticks() > self.next:
-            self.next = pygame.time.get_ticks() + 60
+            self.next = pygame.time.get_ticks() + 70
             keys = pygame.key.get_pressed()
             
             if keys[pygame.K_RETURN]:

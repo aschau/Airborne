@@ -27,15 +27,15 @@ class Main_Menu():
         self.menubarh = 60
 
         self.tfontsize = 56
-        self.tfont = pygame.font.Font(pygame.font.match_font('comicsansms'), self.tfontsize)
+        self.tfont = pygame.font.Font(pygame.font.match_font('cooperblack'), self.tfontsize)
 
         self.bfontsize = 28
-        self.bfont = pygame.font.Font(pygame.font.match_font('comicsansms'), self.bfontsize)
+        self.bfont = pygame.font.Font(pygame.font.match_font('cooperblack'), self.bfontsize)
 
         self.screen = screen
-        self.background = resources.AllSprites["Filler.png"]
+        self.background = resources.AllSprites["Main Menu.png"]
 
-        self.next = pygame.time.get_ticks() + 60
+        self.next = pygame.time.get_ticks() + 70
         
     def draw(self):
         self.screen.blit(self.background, (0, 0))
@@ -48,7 +48,7 @@ class Main_Menu():
 
     def update(self):
         if pygame.time.get_ticks() > self.next:
-            self.next = pygame.time.get_ticks() + 60
+            self.next = pygame.time.get_ticks() + 70
             keys = pygame.key.get_pressed()
 
             if keys[pygame.K_w]:

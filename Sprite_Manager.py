@@ -8,7 +8,7 @@ class SpriteSheets():
             self.folder = folder
             os.path.isdir(self.folder)
 
-        except pygame.error:
+        except os.error:
             print ('Unable to load sprites folder', folder)
             raise SystemExit
 
@@ -34,20 +34,16 @@ class Animate():
         #imagew = image width, the sprites for now are all 32 width
         #imageh = image height, the sprites for now are all 32 height
         
-        try:
-            self.image = image 
-            self.frame = -1
-            self.currentFrame = -1
-            self.frames = frames
-            self.columns = columns
-            self.row = 0
-            self.clock = pygame.time.Clock()
-            self.imagew = imagew
-            self.imageh = imageh
-            
-        except pygame.error:
-            print ('Unable to load images')
-            raise SystemExit
+        self.image = image 
+        self.frame = -1
+        self.currentFrame = -1
+        self.frames = frames
+        self.columns = columns
+        self.row = 0
+        self.clock = pygame.time.Clock()
+        self.imagew = imagew
+        self.imageh = imageh
+
 
     def update(self):
         self.frame += 1

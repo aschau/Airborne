@@ -79,6 +79,8 @@ class Sidebar():
         self.column = 0
         self.pcolumn = 0
 
+        self.blockcount = 0
+
     def draw(self):
         pygame.draw.rect(self.screen, pygame.Color(166, 166, 166, 166), (resources.width, 0, self.width-resources.width, self.height))
 
@@ -89,6 +91,11 @@ class Sidebar():
         for button in range(len(self.buttons2)):
             self.screen.blit(self.buttons2[button], (resources.width + self.menubarw, self.height -  self.menubarh * (button + 1)))
             self.screen.blit(self.bfont.render(self.textbuttons2[button], True, pygame.Color(255,255,255)), (resources.width + 5 + self.menubarw, 5 + self.height -  self.menubarh * (button + 1)))
+
+        for tile in resources.AllSprites.keys():
+            if ("block" in tile):
+                self.screen.blit(resources.AllSprites["basic_block.png"], (resources.width + 32 * self.blockcount, 0))
+                self.blockcount += 1
 
     def switch_button(self, direction):
         self.previous = self.place
