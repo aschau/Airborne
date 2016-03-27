@@ -34,8 +34,9 @@ class Main_Menu():
 
         self.screen = screen
         self.background = resources.AllSprites["Main Menu.png"]
+        self.wait = 100
 
-        self.next = pygame.time.get_ticks() + 70
+        self.next = pygame.time.get_ticks() + self.wait
         
     def draw(self):
         self.screen.blit(self.background, (0, 0))
@@ -48,7 +49,7 @@ class Main_Menu():
 
     def update(self):
         if pygame.time.get_ticks() > self.next:
-            self.next = pygame.time.get_ticks() + 70
+            self.next = pygame.time.get_ticks() + self.wait
             keys = pygame.key.get_pressed()
 
             if keys[pygame.K_w]:

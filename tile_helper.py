@@ -79,7 +79,25 @@ class Sidebar():
         self.column = 0
         self.pcolumn = 0
 
-        self.blockcount = 0
+        self.grid = []
+        for column in range(10):
+            self.grid.append([])
+            for row in range(24):
+                self.grid[column].append("X")
+
+        for tile in resources.AllSprites.keys():
+            self.fill_grid(tile)
+
+    def fill_grid(self, tile):
+        if ("block" in tile):
+            for i in range(len(self.grid)):
+                for n in range(len(self.grid[i])):
+                    if (self.grid[i][n] == "X"):
+                        self.grid[i][n] = tile
+                        return
+
+    def get_griditem(self, column, row):
+        return self.grid[column][row]
 
     def draw(self):
         pygame.draw.rect(self.screen, pygame.Color(166, 166, 166, 166), (resources.width, 0, self.width-resources.width, self.height))
@@ -92,10 +110,10 @@ class Sidebar():
             self.screen.blit(self.buttons2[button], (resources.width + self.menubarw, self.height -  self.menubarh * (button + 1)))
             self.screen.blit(self.bfont.render(self.textbuttons2[button], True, pygame.Color(255,255,255)), (resources.width + 5 + self.menubarw, 5 + self.height -  self.menubarh * (button + 1)))
 
-        for tile in resources.AllSprites.keys():
-            if ("block" in tile):
-                self.screen.blit(resources.AllSprites["basic_block.png"], (resources.width + 32 * self.blockcount, 0))
-                self.blockcount += 1
+        for column in range(len(self.grid)):
+            for row in range(len(self.grid[column])):
+                if self.grid[column][row] != "X":
+                    self.screen.blit(resources.AllSprites[self.grid[column][row]], (resources.width + (32 * column), 32 * row))
 
     def switch_button(self, direction):
         self.previous = self.place
