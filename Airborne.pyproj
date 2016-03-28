@@ -34,15 +34,12 @@
     <Content Include="Sprites\SmallActiveMenu.png" />
     <Content Include="Sprites\SmallMenu.png" />
     <Content Include="Sprites\World.png" />
-    <Content Include="test.txt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Airborne.py" />
     <Compile Include="Main_Menu.py" />
     <Compile Include="resources.py" />
     <Compile Include="Sprite_Manager.py" />
-    <Compile Include="tile_editor.py" />
-    <Compile Include="tile_helper.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Sprites" />

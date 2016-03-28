@@ -3,7 +3,6 @@ import pygame
 from pygame.locals import *
 import resources
 from Main_Menu import *
-from tile_editor import *
 
 if not pygame.font:
     print('Warning, fonts disabled')
@@ -20,7 +19,6 @@ class Airborne:
         self.mode = "menu"
         self.previous = "menu"
         self.clock = pygame.time.Clock()
-        self.editor = Tile_Editor(self.screen)
         self.menu = Main_Menu(self.screen)
 
         self.fontsize = 10
@@ -43,25 +41,8 @@ class Airborne:
                 self.menu.draw()
                 selection = self.menu.update()
 
-                if selection == "editor":
-                    self.mode = "edit"
-                    self.previous = "menu"
-
                 if selection == "exit":
                     resources.running = False
-
-            elif self.mode == "edit":
-                if self.previous != "editor":
-                    self.screen = pygame.display.set_mode((1344, 768), pygame.FULLSCREEN|pygame.RESIZABLE)
-                    self.previous = "editor"
-                    
-                self.editor.draw()
-                self.editor.mouse_update()
-                selection = self.editor.key_update()
-
-                if selection == "menu":
-                    self.mode = "menu"
-                    self.previous = "editor"
 
             self.screen.blit(self.font.render(str(int(self.clock.get_fps())), True, pygame.Color(255,255,255)), (0, 0))
 

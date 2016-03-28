@@ -9,15 +9,14 @@ class Main_Menu():
         self.cbutton = "Continue"
         self.sebutton = "Settings"
         self.ebutton = "Exit"
-        self.edbutton = "Editor"
-        self.textbuttons = [self.sbutton, self.cbutton, self.sebutton, self.ebutton, self.edbutton]
+        self.textbuttons = [self.sbutton, self.cbutton, self.sebutton, self.ebutton]
 
         self.start = resources.AllSprites["ActiveMenu.png"]
         self.cont = resources.AllSprites["Menu.png"]
         self.settings = resources.AllSprites["Menu.png"]
         self.exit = resources.AllSprites["Menu.png"]
         self.editor = resources.AllSprites["Menu.png"]
-        self.buttons = [self.start, self.cont, self.settings, self.exit, self.editor]
+        self.buttons = [self.start, self.cont, self.settings, self.exit,]
 
         self.previous = 0
         self.place = 0
@@ -84,8 +83,3 @@ class Main_Menu():
                 
                 elif self.place == 3:
                     return "exit"
-                    
-                elif self.place == 4:
-                    return "editor"
-
-##        pygame.time.delay(90)
