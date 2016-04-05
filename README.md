@@ -6,6 +6,7 @@ Screen Width = 1024
 Screen Height = 768
 
 Image File Type: PNG
+Audio File Format: .ogg
 
 Python 3.4.4 (32 BIT) https://www.python.org/downloads/release/python-344/
 
